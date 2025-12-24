@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 💖</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{overflow:hidden}
+
+/* COMMON */
+.screen{
+  width:100vw;height:100vh;
+  position:absolute;top:0;left:0;
+  display:flex;justify-content:center;align-items:center;
+  transition:1s;
+}
+.hidden{opacity:0;pointer-events:none}
+
+/* ================= SCREEN 0 ================= */
+#screen0{
+  flex-direction:column;
+  background:linear-gradient(135deg,#ffb6ff,#ffd6e8,#ffe8ff);
+  overflow:hidden;
+}
+
+/* floating flowers bg */
+.flowerBG{
+  position:absolute;
+  font-size:40px;
+  opacity:0.7;
+  animation:floatFlowers 6s linear infinite;
+}
+@keyframes floatFlowers{
+  0%{transform:translateY(110vh) rotate(0deg)}
+  100%{transform:translateY(-120vh) rotate(360deg)}
+}
+
+/* big text */
+.bigTitle{
+  font-size:50px;
+  text-align:center;
+  color:#ff2e93;
+  text-shadow:0 0 20px rgba(255,0,120,.4);
+  animation:popIn 1.2s ease;
+}
+.subTitle{
+  margin-top:10px;
+  font-size:24px;
+  color:#444;
+  animation:fadeUp 1.5s ease;
+}
+
+@keyframes popIn{
+  0%{transform:scale(.7);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+@keyframes fadeUp{
+  0%{opacity:0;transform:translateY(20px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+/* reveal button */
+.reveal-btn{
+  margin-top:30px;
+  padding:14px 40px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(45deg,#ff4ecd,#7f00ff);
+  animation:pulseBtn 1.5s infinite;
+}
+@keyframes pulseBtn{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+
+/* COMMON SCREENS BELOW */
+.screen{
+  background:linear-gradient(135deg,#ffd1f0,#e0c3ff);
+}
+
+/* ========== SCREEN 1 (Cards) ========== */
+#screen1{flex-direction:row;gap:10px}
+#scatterArea{position:absolute;width:100%;height:100%}
+
+.card{
+  width:360px;
+  min-height:190px;
+  background:white;
+  border-radius:22px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.2);
+  font-size:18px;
+  animation:pop .6s ease;
+  position:absolute;
+  transition:left .9s cubic-bezier(.34,1.56,.64,1),
+  top .9s cubic-bezier(.34,1.56,.64,1),
+  transform .6s ease;
+}
+@keyframes pop{from{scale:.7;opacity:0}to{scale:1;opacity:1}}
+
+.centerCard{left:50%!important;top:50%!important;transform:translate(-50%,-50%)}
+.placedBounce{animation:placedBounce .6s ease}
+@keyframes placedBounce{0%{transform:scale(.9)}50%{transform:scale(1.07)}100%{transform:scale(1)}}
+
+.next-btn{
+  position:fixed;bottom:30px;left:50%;
+  transform:translateX(-50%);
+  padding:14px 34px;border:none;border-radius:30px;
+  background:linear-gradient(45deg,#ff4ecd,#7f00ff);
+  color:white;font-size:16px;
+  animation:pulse 1.4s infinite;cursor:pointer;
+}
+@keyframes pulse{
+  0%{transform:translateX(-50%) scale(1)}
+  50%{transform:translateX(-50%) scale(1.08)}
+  100%{transform:translateX(-50%) scale(1)}
+}
+
+/* ================= SCREEN 2 ================= */
+#screen2{
+  justify-content:space-between;
+  padding:40px;
+  background:linear-gradient(135deg,#ffb6ff,#ff9ad6,#ffd1e8);
+  position:relative;
+  overflow:hidden;
+}
+
+/* hearts */
+.cuteHeart{position:absolute;font-size:35px;animation:floatCute 4s ease-in-out infinite;opacity:.9}
+@keyframes floatCute{0%{transform:translateY(0)}50%{transform:translateY(-40px)}100%{transform:translateY(0)}}
+
+/* sparkles */
+.sparkle{position:absolute;color:white;font-size:22px;opacity:.8;animation:twinkle 2s infinite}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+
+.teddy{width:45%;height:100%;display:flex;justify-content:center;align-items:flex-end;position:relative}
+.teddy img{height:90%;animation:teddyBounce 2s ease-in-out infinite}
+@keyframes teddyBounce{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-15px) rotate(2deg)}}
+
+.balloons{position:absolute;left:-40px;top:60px;font-size:80px;animation:floatBalloons 3s ease-in-out infinite}
+@keyframes floatBalloons{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+
+.cap{position:absolute;top:-20px;font-size:70px;animation:capWiggle 2s ease-in-out infinite}
+@keyframes capWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(5deg)}75%{transform:rotate(-5deg)}}
+
+.letter{
+  width:45%;height:80%;background:#f6e2c8;border-radius:14px;
+  padding:40px;box-shadow:inset 0 0 20px rgba(0,0,0,.2),0 0 25px rgba(255,105,180,.7);
+  font-size:18px;line-height:1.7;color:#4b2e1e;position:relative;
+}
+.letter::before{content:"💌";position:absolute;top:-30px;right:-10px;font-size:55px}
+
+#letterText::after{content:"|";animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+
+.next2-btn{
+  margin-top:20px;padding:14px 28px;border:none;border-radius:25px;
+  background:#ff5fa2;color:white;font-size:18px;cursor:pointer;
+}
+
+/* ================= SCREEN 3 ================= */
+#screen3{flex-direction:column;background:radial-gradient(circle at top,#ffe3ff 0,#ff9dd9 40%,#ff5fa2 80%);overflow:hidden}
+
+.flower{position:absolute;font-size:40px;animation:fall 6s linear infinite;opacity:.9}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0)}100%{transform:translateY(110vh) rotate(360deg)}}
+
+.gallery-box{
+  width:50%;height:200%;border-radius:25px;overflow:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,.3);position:relative;border:solid black;
+}
+
+.gallery-box img{width:100%;height:100%;object-fit:cover;position:absolute;opacity:0;transition:opacity 1.5s ease}
+.gallery-box img.active{opacity:1}
+
+.cake-btn{
+  margin-top:30px;padding:16px 32px;border:none;border-radius:30px;
+  background:linear-gradient(45deg,#ff4ecd,#7f00ff);
+  color:white;font-size:20px;cursor:pointer;
+}
+
+.background-text{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:100px;color:#ccc;z-index:-1;pointer-events:none;white-space:nowrap;
+}
+
+/* SCREEN 4 */
+#screen4{
+  flex-direction:column;
+  background:radial-gradient(circle at top,#3b1d82 0,#12002b 35%,#050008 100%);
+  color:white;
+}
+.screen3-inner{width:100%;max-width:1100px;margin:auto;text-align:center}
+.title-3{
+  font-size:38px;margin-bottom:30px;
+  background:linear-gradient(90deg,#ffd3ff,#ffffff,#a0e9ff);
+  -webkit-background-clip:text;color:transparent;
+  text-shadow:0 0 12px rgba(255,255,255,.35);
+}
+.stage{
+  position:relative;width:100%;height:420px;display:flex;
+  align-items:flex-end;justify-content:space-between;padding:0 80px;
+}
+.character-box,.cake-box{
+  position:relative;width:500px;height:500px;display:flex;align-items:center;justify-content:center;
+}
+#doraemon-gif{width:500px;height:500px;object-fit:contain;z-index:2}
+.glow-circle{
+  position:absolute;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,#4fd6ff 0,#1b4a8f 70%,transparent 100%);
+  filter:blur(4px);opacity:.9;
+}
+.glow-pink{background:radial-gradient(circle,#ff8ad9 0,#b03080 70%,transparent 100%)}
+#cake{height:430px;z-index:2}
+#knife{position:absolute;right:6px;bottom:150px;height:90px;z-index:3}
+.fireworks-container{position:absolute;inset:0;pointer-events:none}
+
+/* SCREEN 5 */
+#screen5{
+  flex-direction:column;
+  background:linear-gradient(135deg,#ffb6ff,#ff9ad6,#ff77c8,#ffb6ff);
+  overflow:hidden;
+}
+#heartRain div{position:absolute}
+
+/* heart falling */
+@keyframes drop{
+  0%{transform:translateY(-10vh)}
+  100%{transform:translateY(110vh)}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="mainMusic" loop>
+  <source src="song.mp3" type="audio/mp3">
+</audio>
+<!-- SCREEN 0 -->
+<div id="screen0" class="screen">
+  <div class="flowerBG" style="left:10%">🌸</div>
+  <div class="flowerBG" style="left:30%">🌷</div>
+  <div class="flowerBG" style="left:50%">🌺</div>
+  <div class="flowerBG" style="left:70%">🌼</div>
+  <div class="flowerBG" style="left:85%">💮</div>
+
+  <h1 class="bigTitle">Happy Birthday Kasvii 💖</h1>
+  <p class="subTitle">or (My Favourite Person) 🌸✨</p>
+
+  <button class="reveal-btn" onclick="goCards()">Reveal Surprise 🎁</button>
+</div>
+
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen hidden">
+  <div id="scatterArea"></div>
+  <div id="card" class="card centerCard"></div>
+  <button class="next-btn" onclick="nextCard()">Next 💌</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div id="screen2" class="screen hidden">
+  <div class="teddy">
+    <img src="teddy.png">
+    <div class="balloons">🎈🎈🎈</div>
+    <div class="cap">🎉</div>
+  </div>
+
+  <div class="letter">
+    <div id="letterText"></div>
+    <button class="next2-btn" onclick="goPhotos()">Next ➜</button>
+  </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="screen3" class="screen hidden">
+  <div class="flower">🌸</div>
+  <div class="flower">🌷</div>
+  <div class="flower">🌺</div>
+  <div class="flower">🌼</div>
+  <div class="flower">💮</div>
+
+  <audio id="bgMusic" loop><source src="your-song.mp3"></audio>
+
+  <div class="gallery-box">
+    <img src="photo1.jpg" class="active">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+    <img src="photo5.jpg">
+    <img src="photo6.jpg">
+    <!-- <img src="photo7.jpg"> -->
+    <img src="photo8.jpg">
+    <img src="photo9.jpg">
+    <img src="photo10.jpg">
+    <img src="photo11.jpg">
+    <!-- <img src="photo13.jpg"> -->
+    <img src="photo15.jpg">
+    <img src="photo16.jpg">
+    <img src="photo17.jpg">
+  </div>
+
+  <button class="cake-btn" onclick="goCake()">Time to cut the cake 🎂</button>
+</div>
+
+<div class="background-text">
+  <p>HAPPY BIRTHDAY KASHUUU 😘</p>
+</div>
+
+<!-- SCREEN 4 -->
+<div id="screen4" class="screen hidden">
+  <div class="screen3-inner">
+    <h1 class="title-3">Happy Birthday My Doraemon 💙</h1>
+
+    <div class="stage">
+      <div class="character-box">
+        <div class="glow-circle"></div>
+        <img id="doraemon-gif" src="doraemon.gif">
+      </div>
+
+      <div class="cake-box">
+        <div class="glow-circle glow-pink"></div>
+        <img id="cake" src="cake.png">
+        <img id="knife" src="knife.png">
+      </div>
+
+      <div class="fireworks-container" id="fireworks"></div>
+    </div>
+
+    <!-- BUTTON TO GO SCREEN 5 -->
+    <button onclick="goFinal()" style="
+      margin-top:40px;
+      padding:16px 34px;
+      border:none;
+      border-radius:30px;
+      background:linear-gradient(45deg,#ff4ecd,#7f00ff);
+      color:white;
+      font-size:20px;
+      cursor:pointer;">
+      Final Surprise 💖
+    </button>
+  </div>
+</div>
+
+<!-- SCREEN 5 -->
+<div id="screen5" class="screen hidden">
+  <div id="heartRain"></div>
+
+  <h1 style="font-size:50px;text-align:center;color:white;text-shadow:0 0 40px white;margin-bottom:20px;">
+    ✨ Last One… But not the Most Special ✨
+  </h1>
+
+  <div style="width:70%;max-width:750px;padding:35px;border-radius:25px;background:white;text-align:center;
+  font-size:24px;line-height:1.7;color:#ff2288;box-shadow:0 0 40px rgba(255,0,140,.8);border:4px solid #ff7ecf;">
+    <p>💖 <b>Tuu bohot khass hh...</b></p>
+    <p><b>aurr uss se bhi khass tera saath, tera hona hh (in short tujhse zada khas tu khud hh bass😭)🥹✨</b></p>
+  </div>
+
+  <p style="margin-top:35px;font-size:24px;color:white;text-shadow:0 0 20px white;">
+    kaisaa lagaa surprisee teko… bataiyee jrurrr 😘🎁<br> <h2 style="width:70%;max-width:750px;padding:35px;border-radius:25px;background:white;text-align:center;
+  font-size:24px;line-height:1.7;color:#ff2288;box-shadow:0 0 40px rgba(255,0,140,.8);border:4px solid #ff7ecf;">Once again a veryy veryy veryyy Happy birthdayy bhyiii 😭💝 Miss uu a lottt 🫂🥹</h2>
+  </p>
+</div>
+
+<script>
+
+window.addEventListener("click", () => {
+  const music = document.getElementById("mainMusic");
+  music.play();
+});
+
+
+function goCards(){
+  screen0.classList.add("hidden");
+  screen1.classList.remove("hidden");
+}
+
+/* ========= Screen 1 ========= */
+const messages=[
+"Hey! Happy walaa birthday cutiee 💖Tujhe nii pata tu kitni important h iss manushy ke survival kke liyee re 🥹🙌💝",
+"Tuu bohottt pyarrii hh bhyii 😭 Bohott zadaaaa... bilkul [ lim (x-->0) tan x ] hh ksm se 🥹",
+"Tu sirf merii cousin nahi, meri best friend mera jigar hai 🥹",
+"Mera fav gaana tere hsne wali awaj hai literally 😭🥺",
+"Mehh hamesha tere sathh huu yrr... chahe or koi hoo yah nhii",
+"Teri care sabse bestt feel karawee yrr💝",
+"pta hh terse baat kiyee bina din me backlog sa lagta hai 🌸🥲",
+"Meh hamesha terii safe place banunga.. Promisee bhyii🫂🤍",
+"Orr haa... ek baat h agle card pe bataunga dkh😝",
+"Na to aaj tk teko judge kra or na kbhi aage kruu sweetu🥹🎁",
+"Aaj ke din yeh happiness mere jeevan kaal mehh, iss duniya me aayi thii.. hayeeee yeh dinn 💝😭🎂",
+"Orr haa I will never compromise in my efforts for youuu... frr chahe meri 1st nyt hoo🌚 yahh last nytt 🥹💘😘",
+"Bhyiii tu jitni amazing h nahh... bhgwn kree ussee bhii 100 nhi 1000 nhii 1000000x amazing terii lyff hoo 🙌🤗"
+];
+
+let i=0;
+let card=document.getElementById("card");
+let placedCards=[];
+const scatterArea=document.getElementById("scatterArea");
+const screen1=document.getElementById("screen1");
+const screen2=document.getElementById("screen2");
+const screen3=document.getElementById("screen3");
+const screen4=document.getElementById("screen4");
+const screen5=document.getElementById("screen5");
+const screen0=document.getElementById("screen0");
+const letterText=document.getElementById("letterText");
+
+card.innerText=messages[0];
+scatterArea.appendChild(card);
+
+function nextCard(){
+  if(card.classList.contains("centerCard"))
+    card.classList.remove("centerCard");
+
+  placedCards.push(card);
+
+  const gap=12,cardW=360,cardH=200;
+  const cols=Math.max(1,Math.floor(window.innerWidth/(cardW+gap)));
+
+  placedCards.forEach((c,index)=>{
+    const row=Math.floor(index/cols);
+    const col=index%cols;
+    c.style.left=(col*(cardW+gap))+"px";
+    c.style.top=(row*(cardH+gap))+"px";
+  });
+
+  i++;
+  if(i<messages.length){
+    const n=document.createElement("div");
+    n.className="card centerCard";
+    n.innerText=messages[i];
+    card=n;
+    scatterArea.appendChild(n);
+    n.onclick=nextCard;
+  }else{
+    setTimeout(()=>{
+      screen1.classList.add("hidden");
+      screen2.classList.remove("hidden");
+      spawnCuteDecor();
+      typeLetter();
+    },1200);
+  }
+}
+card.onclick=nextCard;
+
+/* ========= Cute Decor ========= */
+function spawnCuteDecor(){
+  for(let i=0;i<18;i++){
+    let h=document.createElement("div");
+    h.className="cuteHeart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*100+"vh";
+    screen2.appendChild(h);
+  }
+  for(let i=0;i<15;i++){
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.innerHTML="✨";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    screen2.appendChild(s);
+  }
+}
+
+/* ========= Letter ========= */
+const letter=
+"Happy Birthday meri sabse special insan myy prsnl doraemonn 💕\n\n"+
+"I guess tujhe pata to hoga hi how muchh uu mean to mee 🥲 batane ki to zrurt nhii but still...Tu meri life ka wo part hai jahan sirf smiles, trustt aur endless memories hain, shii mee...Hey Listen ! Ooo my dolly dolly mere vitamin kii golii 😂 , I am always and always and hameshaaaa their for you huu without any judgment orr chugliii tujhe to pata hi 😌(sbkuch to pata hi h tujhe 😭😝😋.)\n\n"+"Happy birthday to you the most precious women i hv in my lyff who is not just myy shishterr butt also my ACHI wali PAKI wali PYARI wali HRR TAREEKE walii pyalii chii nanhii chiii cutuu chii param vandaniye aadarniyee sammanniye karudamayiyaiyee mahilaa mittarrrrr(dil ke pass nhi dil ke sbsee andarrr waliii )🥹🥹🥹💘....\n\n"
+let j=0;
+function typeLetter(){
+  if(j<letter.length){
+    letterText.innerText+=letter[j++];
+    setTimeout(typeLetter,45);
+  }
+}
+
+/* ========= Screens ========= */
+function goPhotos(){
+  screen2.classList.add("hidden");
+  screen3.classList.remove("hidden");
+  startGallery();
+}
+
+let index=0;
+function startGallery(){
+  const photos=document.querySelectorAll(".gallery-box img");
+  setInterval(()=>{
+    photos[index].classList.remove("active");
+    index=(index+1)%photos.length;
+    photos[index].classList.add("active");
+  },2000);
+}
+
+function goCake(){
+  screen3.classList.add("hidden");
+  screen4.classList.remove("hidden");
+}
+
+/* ========= FINAL SCREEN ========= */
+function goFinal(){
+  screen4.classList.add("hidden");
+  screen5.classList.remove("hidden");
+  spawnHeartRain();
+}
+
+function spawnHeartRain(){
+  let heartRain=document.getElementById("heartRain");
+  for(let i=0;i<40;i++){
+    let h=document.createElement("div");
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*-100+"px";
+    h.style.fontSize=(30+Math.random()*25)+"px";
+    h.style.animation=`drop ${2+Math.random()*2}s linear infinite`;
+    heartRain.appendChild(h);
+  }
+}
+</script>
+
+</body>
+</html>
